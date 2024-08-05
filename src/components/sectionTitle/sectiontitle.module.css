@@ -1,0 +1,21 @@
+.sectionTitle {
+    background-color: #fffbe9;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.titleContainer{
+    position: relative;
+    overflow: hidden;
+}
+
+.titleContainer img{
+    position: absolute;
+    left: 50%;
+    transform:translateX(-50%);
+    top:40%
+}

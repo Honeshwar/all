@@ -1,0 +1,432 @@
+import { useFilterContextValue } from "@/context/FilterContext";
+import Loading from "@/components/Loading";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+
+function RangeSlider() {
+  const inputRef = useRef(null);
+  const defaultRangeRef = useRef(null);
+  const rangeRef = useRef(null);
+  const deltaRef = useRef(null);
+
+  const {
+    selected_party,
+    selected_Voter_Percentage,
+    setSelected_Voter_Percentage,
+    electionType,
+    selected_state,
+    setCloseAnimation,
+    default_delta_value,
+    setDefault_delta_value,
+  } = useFilterContextValue();
+
+  useEffect(() => {
+    const fetchParties = async () => {
+      // setLoading(true);
+      const type = electionType === "STATE" ? "state" : "nation";
+      const state =
+        electionType === "STATE"
+          ? `&state=${encodeURIComponent(selected_state)}`
+          : "";
+      try {
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_API_URL +
+            "/analysis/voteshare?type=" +
+            type +
+            "&party=" +
+            selected_party.party +
+            state
+        );
+        const responseData = await response.json();
+        const defaultRange = responseData.data;
+
+        if (defaultRangeRef.current) {
+          defaultRangeRef.current.innerText = defaultRange + "%";
+          inputRef.current.value = defaultRange;
+        }
+
+        setSelected_Voter_Percentage({
+          delta: defaultRange,
+          delta_type:
+            defaultRange - selected_Voter_Percentage.delta > 0
+              ? "positive"
+              : "negative",
+        });
+        setValue(Number(defaultRange));
+        setDefault_delta_value(Number(defaultRange));
+        if (deltaRef.current) deltaRef.current.innerText = "0%";
+        // setLoading(false);
+      } catch (error) {
+        console.log("error in fetch parties", error);
+      } finally {
+        // setLoading(false);
+      }
+    };
+    fetchParties();
+  }, [selected_party, electionType]);
+
+  const [value, setValue] = useState(-1); // State to manage slider value
+
+  // Create a debounced version of the handleChange function
+  const debouncedHandleChange = useCallback(
+    debouncing((v) => setSelected_Voter_Percentage(v), 500),
+    []
+  );
+
+  const handleChange = (event, click = false) => {
+    const newValue = click ? Number(event) : Number(event.target.value);
+
+    // color change
+    if (newValue < value) {
+      rangeRef.current.style.color = "rgb(239, 68, 68)"; //red
+    } else if (newValue >= value) {
+      rangeRef.current.style.color = "rgb(34 ,197, 94)"; //green
+    }
+
+    // check is user click or slide
+    if (click) {
+      inputRef.current.value = newValue;
+    }
+    // else rangeRef.current.style.color = "rgb(0,0,0)";
+
+    const newDelta = newValue - default_delta_value;
+
+    // setting delta at input  slider
+    if (newDelta === 0) {
+      deltaRef.current.innerText = "0%";
+    } else if (newDelta > 0) {
+      deltaRef.current.innerText = "+" + newDelta.toFixed(0) + "%";
+    } else {
+      deltaRef.current.innerText = newDelta.toFixed(0) + "%";
+    }
+
+    if (newValue === default_delta_value)
+      debouncedHandleChange({
+        delta: default_delta_value,
+        delta_type: "positive",
+      });
+    else
+      debouncedHandleChange({
+        delta: Math.abs(newDelta).toFixed(0),
+        delta_type: newDelta >= 0 ? "positive" : "negative",
+      });
+    setValue(Number(newValue));
+  };
+
+  function debouncing(func, delay) {
+    let timeoutId;
+    return (...args) => {
+      let a = clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(null, args);
+      }, delay);
+    };
+  }
+
+  return (
+    <>
+      {default_delta_value === -1 ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            id="election_calculator-rangeInput"
+            className="w-full flex gap-3 items-center mt-6"
+          >
+            <div className="slider-container px-3  py-[10px] border-2 rounded-full flex justify-center items-center">
+              <input
+                ref={inputRef}
+                id="range-slider"
+                type="range"
+                min="0"
+                max="100"
+                defaultValue={value}
+                onChange={(e) => {
+                  const dec = document.getElementById("dec-input");
+                  const inc = document.getElementById("inc-input");
+                  dec.value !== "0" ? (dec.value = 0) : null;
+                  inc.value !== "0" ? (inc.value = 0) : null;
+
+                  handleChange(e);
+                }}
+                className="slider range-slider rounded-full py-[7px] "
+              />
+
+              {/* value change */}
+              <span
+                ref={rangeRef}
+                className={"value-display "}
+                style={{
+                  left:
+                    value <= 20
+                      ? value + 10 + `%`
+                      : value <= 40
+                      ? value + 7 + `%`
+                      : value <= 60
+                      ? value + 3 + `%`
+                      : value <= 80
+                      ? value - 2 + `%`
+                      : value - 5 + `%`,
+                  color: "gray",
+                  // top: "38px",
+                  top: "-28px",
+                  paddingInline: "20px",
+                }}
+              >
+                {value === default_delta_value
+                  ? ""
+                  : value % 1 === 0
+                  ? value + "%"
+                  : value.toFixed(1) + "%"}
+              </span>
+
+              {/* dotted line and default value change*/}
+              <span
+                // onClick={() => handleChange(default_delta_value, true)}
+                className="border-r border-dashed border-gray-400  absolute  h-full w-[1px] z-[0]"
+                style={{
+                  left:
+                    default_delta_value === 0
+                      ? default_delta_value + 6 + `%`
+                      : default_delta_value <= 5
+                      ? default_delta_value + 8 + `%`
+                      : default_delta_value <= 10
+                      ? default_delta_value + 7 + `%`
+                      : default_delta_value <= 15
+                      ? default_delta_value + 6 + `%`
+                      : default_delta_value <= 20
+                      ? default_delta_value + 5 + `%`
+                      : default_delta_value <= 25
+                      ? default_delta_value + 4.5 + `%`
+                      : default_delta_value <= 30
+                      ? default_delta_value + 3.5 + `%`
+                      : default_delta_value <= 35
+                      ? default_delta_value + 2.9 + `%`
+                      : default_delta_value <= 40
+                      ? default_delta_value + 1.9 + `%`
+                      : default_delta_value <= 45
+                      ? default_delta_value + 1.3 + `%`
+                      : default_delta_value <= 50
+                      ? default_delta_value + 0.5 + `%`
+                      : default_delta_value <= 55
+                      ? default_delta_value - 0.5 + `%`
+                      : default_delta_value <= 60
+                      ? default_delta_value - 1.2 + `%`
+                      : default_delta_value <= 65
+                      ? default_delta_value - 2.5 + `%`
+                      : default_delta_value <= 70
+                      ? default_delta_value - 3.3 + `%`
+                      : default_delta_value <= 75
+                      ? default_delta_value - 4.1 + `%`
+                      : default_delta_value <= 80
+                      ? default_delta_value - 5.2 + `%`
+                      : default_delta_value <= 85
+                      ? default_delta_value - 5.8 + `%`
+                      : default_delta_value <= 90
+                      ? default_delta_value - 6.3 + `%`
+                      : default_delta_value <= 95
+                      ? default_delta_value - 7.4 + `%`
+                      : default_delta_value <= 99
+                      ? default_delta_value - 8 + `%`
+                      : default_delta_value - 6 + `%`,
+                }}
+              ></span>
+              <span
+                onClick={() => handleChange(default_delta_value, true)}
+                ref={defaultRangeRef}
+                className={"value-display  cursor-pointer"}
+                style={{
+                  left:
+                    default_delta_value <= 5
+                      ? default_delta_value + 8 + `%`
+                      : default_delta_value <= 10
+                      ? default_delta_value + 7 + `%`
+                      : default_delta_value <= 15
+                      ? default_delta_value + 6 + `%`
+                      : default_delta_value <= 20
+                      ? default_delta_value + 5 + `%`
+                      : default_delta_value <= 25
+                      ? default_delta_value + 4.5 + `%`
+                      : default_delta_value <= 30
+                      ? default_delta_value + 3.5 + `%`
+                      : default_delta_value <= 35
+                      ? default_delta_value + 2.9 + `%`
+                      : default_delta_value <= 40
+                      ? default_delta_value + 1.9 + `%`
+                      : default_delta_value <= 45
+                      ? default_delta_value + 1.3 + `%`
+                      : default_delta_value <= 50
+                      ? default_delta_value + 0.5 + `%`
+                      : default_delta_value <= 55
+                      ? default_delta_value - 0.5 + `%`
+                      : default_delta_value <= 60
+                      ? default_delta_value - 1.5 + `%`
+                      : default_delta_value <= 65
+                      ? default_delta_value - 2.5 + `%`
+                      : default_delta_value <= 70
+                      ? default_delta_value - 3.3 + `%`
+                      : default_delta_value <= 75
+                      ? default_delta_value - 4.3 + `%`
+                      : default_delta_value <= 80
+                      ? default_delta_value - 5.2 + `%`
+                      : default_delta_value <= 85
+                      ? default_delta_value - 5.8 + `%`
+                      : default_delta_value <= 90
+                      ? default_delta_value - 6.3 + `%`
+                      : default_delta_value <= 95
+                      ? default_delta_value - 7.4 + `%`
+                      : default_delta_value - 8 + `%`,
+                  color: "gray",
+                  // top: "-28px",
+                  top: "40px",
+                }}
+              >
+                {default_delta_value}%
+              </span>
+
+              {/* tooltip/delta */}
+              <span
+                onClick={() => handleChange(default_delta_value, true)}
+                ref={deltaRef}
+                className={"absolute text-[10px] top-[calc(50%-6px)]"}
+                style={{
+                  left:
+                    value <= 15
+                      ? value + 13 + `%`
+                      : value <= 20
+                      ? value - 8 + `%`
+                      : value <= 40
+                      ? value - 12 + `%`
+                      : value <= 60
+                      ? value - 16 + `%`
+                      : value <= 80
+                      ? value - 21 + `%`
+                      : value - 25 + `%`,
+                  color: value <= 15 ? "gray" : "white",
+                }}
+              >
+                {/* {"-5%"} */}
+              </span>
+            </div>
+
+            {/* info icon btn */}
+            <svg
+              onClick={() => setCloseAnimation(false)}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 192 512"
+              fill="gray"
+              className="w-5 h-5 border-2 border-gray-300 hover:border-gray-600 cursor-pointer  rounded-full p-[4px]"
+            >
+              <path d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z" />
+            </svg>
+          </div>
+
+          {/* after input slider */}
+          <div
+            id="election_calculator-rangeBtn"
+            className="w-full flex justify-center items-center gap-5    mt-8"
+          >
+            {/* decrease input */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                // console.log("e", e);
+                // document.getElementById("inc-input").value = 0;
+
+                const inputValue = Number("-" + e.target[0].value);
+
+                const value1 = inputValue + value;
+
+                if (inputValue === 0 || value === 0) return;
+                handleChange(value1 < 0 ? 0 : value1, true);
+              }}
+              className="flex gap-1 items-center"
+            >
+              <input
+                className="w-10 pl-1 number-input border-[1px] border-gray-400  rounded-sm outline-none"
+                type="number"
+                placeholder="0"
+                min={0}
+                max={100}
+                required
+                id="dec-input"
+                defaultValue={0}
+                onChange={(e) => {
+                  const element = document.getElementById("inc-input");
+                  if (element.value === "0") return;
+                  element.value = 0;
+                }}
+              />
+              <button
+                className="font-extrabold bg-gray-400 hover:bg-gray-500 rounded-sm flex justify-center items-center w-6 h-6 text-white"
+                type="submit"
+              >
+                -
+              </button>
+            </form>
+            {/* reset button */}
+            <div className="w-fit  flex justify-center ">
+              <button
+                onClick={() => {
+                  const dec = document.getElementById("dec-input");
+                  const inc = document.getElementById("inc-input");
+                  // dec.value !== "0" ? (dec.value = 0) : null;
+                  // inc.value !== "0" ? (inc.value = 0) : null;
+
+                  if (value === default_delta_value) return;
+                  handleChange(default_delta_value, true);
+                  dec.value !== "0" ? (dec.value = 0) : null;
+                  inc.value !== "0" ? (inc.value = 0) : null;
+                }}
+                className="text-sm bg-gray-400 rounded-md px-2 py-[5px] text-white w-full hover:bg-gray-500"
+              >
+                Reset
+              </button>
+            </div>
+
+            {/* increase input */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                // console.log("e", e);
+                // document.getElementById("dec-input").value = 0;
+
+                const inputValue = Number(e.target[0].value);
+
+                const value1 = inputValue + value;
+
+                if (inputValue === 0 || value === 100) return;
+                handleChange(value1 > 100 ? 100 : value1, true);
+              }}
+              className="flex gap-1 items-center"
+            >
+              <input
+                className="w-10 pl-1 number-input border-[1px] border-gray-400  rounded-sm outline-none"
+                type="number"
+                placeholder="0"
+                min={0}
+                max={100}
+                required
+                id="inc-input"
+                defaultValue={0}
+                onChange={(e) => {
+                  const element = document.getElementById("dec-input");
+                  if (element.value === "0") return;
+                  // console.log("element", element.value, typeof element.value);
+                  element.value = 0;
+                }}
+              />
+              <button
+                className="font-extrabold bg-gray-400 hover:bg-gray-500 rounded-sm flex justify-center items-center w-6 h-6 text-white"
+                type="submit"
+              >
+                +
+              </button>
+            </form>
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+export default RangeSlider;
