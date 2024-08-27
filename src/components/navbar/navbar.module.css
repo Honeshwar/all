@@ -1,0 +1,262 @@
+.navbar {
+  background-color: #ffcc00;
+  color: #fff;
+  padding: 16px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+}
+
+.toggler {
+  display: none;
+  padding: 3px;
+  border: 1px solid rgb(41, 41, 41);
+  border-radius: 5px;
+}
+
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.navbar button {
+  color: #ffcc00;
+  background-color: black;
+  font-weight: bold;
+  box-shadow: -2px 8px 14px rgba(0, 0, 0, 0.24);
+  padding: 8px 35px;
+  border-radius: 6px;
+}
+
+.navbarLinks button {
+  display: none;
+}
+
+.navbarLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbarLinks a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 35px;
+  font-weight: 600;
+  color: black;
+}
+
+.collapsed {
+  display: unset;
+}
+
+.activeLink {
+  position: relative;
+  display: inline-flex;
+}
+
+.activeLink img {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropDown {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #ffcc00;
+  border-radius: 6px;
+  padding: 0;
+  z-index: 1;
+}
+
+.dropDownItem {
+  margin: 0px;
+  padding: 2px 5px;
+  border-bottom: 1px solid goldenrod;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: normal;
+}
+.dropDownItem:hover {
+  background-color: goldenrod;
+}
+
+.carrers {
+  /* visibility: hidden; */
+  display: none;
+}
+
+.electionContainer.desktop {
+  margin-right: 2%;
+  display: block;
+  cursor: pointer;
+}
+.electionContainer.mobile {
+  display: none;
+  cursor: pointer;
+}
+
+.electionBtn {
+  /* width: 148px;
+  height: 48px; */
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  background: linear-gradient(180deg, #002c52 0%, #00182d 100%);
+
+  position: relative;
+  box-shadow: 0 2px 1px #00182d;
+
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.electionText {
+  color: #ffcc00;
+  /* font-family: Roboto; */
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-left: 15px;
+}
+
+.electionNew {
+  position: absolute;
+  top: 0;
+  left: -5px;
+}
+
+#election_Btn_Dropdown {
+  position: absolute;
+  background: linear-gradient(180deg, #002c52 0%, #00182d 100%);
+
+  max-width: 250px;
+  min-width: 150px;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 15px 10px;
+  top: 65px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+  margin-left: -5px;
+}
+
+#election_Btn_Dropdown li {
+  color: #ffcc00;
+  /* font-family: Roboto; */
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+  /* cursor: pointer; */
+  border: #ffcc00 1px solid;
+}
+
+#election_Btn_Dropdown li a {
+  display: inline-block;
+  padding: 3px 5px;
+  width: 100%;
+  color: #ffcc00;
+}
+
+#election_Btn_Dropdown li a:hover {
+  background: white;
+  color: black;
+  border-radius: 5px;
+}
+#election_Btn_Dropdown li:hover {
+  border: 1px solid #00182d;
+  box-shadow: 0 0 4px 1px #00182d;
+  border-radius: 5px;
+}
+@media (max-width: 1150px) {
+  .electionContainer.desktop {
+    margin-right: 0%;
+    display: block;
+  }
+}
+@media (max-width: 1000px) {
+  .navbarContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .navbarLinks {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 100%;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .navbarLinks a {
+    margin-left: unset;
+  }
+
+  .navbar a button {
+    display: none;
+  }
+
+  .carrers {
+    display: none;
+  }
+
+  .toggler {
+    display: block;
+    align-self: flex-end;
+  }
+
+  .navbarLinks button {
+    display: block !important;
+  }
+
+  .dropDown {
+    margin-left: unset;
+  }
+
+  .collapsed {
+    display: none;
+  }
+
+  .electionContainer.desktop {
+    display: none;
+  }
+  .electionContainer.mobile {
+    display: block;
+    padding-bottom: 4px;
+  }
+  .mobile #election_Btn_Dropdown {
+    top: calc(96%);
+  }
+
+  #election_Btn_Dropdown li a {
+    color: #ffcc00;
+  }
+}

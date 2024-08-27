@@ -1,0 +1,27 @@
+.container {
+	background-color: #fffbe9;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.authorImg {
+	width: 100px;
+	border-radius: 50%;
+	height: 100px;
+	overflow: hidden;
+}
+
+.authorImg img {
+	width: 100%;
+	object-fit: cover;
+	height: 100%;
+}
+
+@media (max-width: 600px) {
+	.authorImg {
+		width: 80px;
+		border-radius: 50%;
+		height: 80px;
+		overflow: hidden;
+	}
+}

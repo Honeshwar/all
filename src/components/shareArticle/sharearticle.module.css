@@ -1,0 +1,58 @@
+.shareSection {
+    position: absolute;
+    top: 13%;
+    right: 3%;
+    display: flex;
+    width: 12%;
+    margin: auto;
+}
+
+.shareContainer {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.shareContainer > p {
+    margin-bottom: 10px !important;
+}
+
+.shareContainer a {
+    width: 17% !important;
+    display: block;
+}
+
+.shareBtns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .shareSection {
+        right: 5%;
+        width: 40%;
+        top: 12%;
+        position: absolute;
+    }
+    
+    .shareContainer {
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .shareContainer p {
+        margin-bottom: 0px !important;
+        text-align: center;
+    }
+    
+    .shareContainer a {
+        width: 100%;
+    }
+}

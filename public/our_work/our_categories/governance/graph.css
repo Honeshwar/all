@@ -1,0 +1,21 @@
+.col1{
+    text-align:left;
+
+}
+
+.col1 img{
+    max-width:100%;
+    width:80%;
+}
+
+.ai th{
+    height:70px !important;
+}
+
+.ai_body tr td{
+    height:70px !important;
+}
+
+.i{
+    width:100px;
+}
