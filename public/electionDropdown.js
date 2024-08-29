@@ -38,6 +38,60 @@ $(document).ready(function () {
   $("body>div:has(.row .footer_logo)").hide();
 
   $("body").append(`
+    <center>
+      <p
+        class="social_media_container"
+        style="margin-bottom: 0px !important; padding-bottom: 10px"
+      >
+        <span class="px-2">
+          <a
+            href="https://www.facebook.com/DhruvResearch"
+            target="_blank"
+            class="social"
+            style="color: white"
+            ><img alt="image"
+              loading="lazy"
+              src="./images/facebook-logo.png"
+              alt /></a
+        ></span>
+        <span class="px-2"
+          ><a
+            href="https://twitter.com/dhruvresearch"
+            target="_blank"
+            class="social"
+            style="color: white"
+            ><img alt="image" loading="lazy" src="./images/twitter-logo.svg" alt /></a
+        ></span>
+        <span class="px-2"
+          ><a
+            href="https://www.linkedin.com/company/dhruvaresearch/?viewAsMember=true"
+            target="_blank"
+            class="social"
+            style="color: white"
+            ><img alt="image"
+              loading="lazy"
+              src="./images/linkedin-icon-social.png"
+              alt /></a
+        ></span>
+        <span class="px-2"
+          ><a
+            href="https://www.youtube.com/@dhruvresearch"
+            target="_blank"
+            class="social"
+            style="color: white"
+            ><img alt="image" loading="lazy" src="./images/youtube-logo.png" alt /></a
+        ></span>
+        <span class="px-2"
+          ><a
+            href="https://instagram.com/dhruvresearch"
+            target="_blank"
+            class="social"
+            style="color: white"
+            ><img alt="image" loading="lazy" src="./images/Insta Logo.png" alt /></a
+        ></span>
+      </p>
+    </center>
+    
   <footer id="footer" style="background-color:#ffcc00">
   <div class="footer-container">
     <div class="footer-top">
