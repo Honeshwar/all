@@ -1702,8 +1702,8 @@ CSS for footer */
 .footer-container {
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   margin-top: 2rem;
   max-width: 1280px;
 
@@ -1714,7 +1714,7 @@ CSS for footer */
 .footer-top {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .footer-item-left {
@@ -1830,6 +1830,9 @@ CSS for footer */
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+  .footer-top {
+    gap: 1.5rem;
+  }
   .footer-item-left {
     align-items: flex-start;
   }
@@ -1874,6 +1877,7 @@ CSS for footer */
 
   .footer-top {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
   }
 
   .footer-item-right {

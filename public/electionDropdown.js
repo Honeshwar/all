@@ -101,7 +101,7 @@ $(document).ready(function () {
         </div>
 
         <p class="footer-address">A237 2nd floor, JMD megapolis, Sector 48 Sohna road, Gurgaon, Haryana -122018</p>
-        <p><a style="color: #2d9cdb" href="https://www.google.com/maps?ll=28.419554,77.038622&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=11038806537044962771" target="_blank">Location</a></p>
+        <p><a style="color: #2d9cdb" href="https://www.google.com/maps?ll=28.419554,77.038622&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=11038806537044962771" target="_blank">Get Direction</a></p>
 
         <ul class="footer-social-media">
           <li class="footer-social-items">
@@ -176,34 +176,7 @@ $(document).ready(function () {
 
       <div class="footer-item-right">
       
-        <div class="footer-category">
-          <p class="footer-category-p">Services</p>
-
-          <ul class="footer-category-list">
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Market Research and Multimodal Survey </a>
-            </li>
-
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Media & Entertainment Rating </a>
-            </li>
-
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Economy & Financial Scanner </a>
-            </li>
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Consumer Preference Index </a>
-            </li>
-
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Politics and Governance </a>
-            </li>
-
-            <li>
-              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Survey Scripting </a>
-            </li>
-          </ul>
-        </div>
+        
 
         <div class="footer-category">
           <p class="footer-category-p">Company</p>
@@ -257,3 +230,36 @@ $(document).ready(function () {
 </footer>
   `);
 });
+
+/*
+<div class="footer-category">
+          <p class="footer-category-p">Services</p>
+
+          <ul class="footer-category-list">
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Market Research and Multimodal Survey </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Media & Entertainment Rating </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Economy & Financial Scanner </a>
+            </li>
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Consumer Preference Index </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Politics and Governance </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Survey Scripting </a>
+            </li>
+          </ul>
+        </div>
+
+
+*/

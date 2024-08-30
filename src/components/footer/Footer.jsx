@@ -1,9 +1,9 @@
 import styles from "./footer.module.css";
 const Footer = () => {
   return (
-    <footer class="bg-[#ffcc00]">
-      <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <footer class="bg-[#ffcc00] text-[14px]">
+      <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-8 md:py-16 sm:px-6 lg:space-y-16 lg:px-8">
+        <div class="grid grid-cols-1 gap-4 md:gap-8 lg:grid-cols-3">
           <div class="flex flex-col items-center sm:items-start">
             <div class="text-teal-600">
               <img
@@ -23,7 +23,7 @@ const Footer = () => {
                 href="https://www.google.com/maps?ll=28.419554,77.038622&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=11038806537044962771"
                 target="_blank"
               >
-                Location
+                Get Direction
               </a>
             </p>
             <ul class="mt-8 flex gap-3 sm:gap-6">
@@ -252,7 +252,7 @@ const Footer = () => {
           </div>
 
           <div class="grid grid-cols-1 gap-4 md:gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-3">
-            <div class="flex flex-col items-center sm:items-start">
+            {/* <div class="flex flex-col items-center sm:items-start">
               <p class="font-medium text-gray-900">Services</p>
 
               <ul class="mt-2 flex flex-col items-center space-y-2 text-sm sm:items-start">
@@ -313,7 +313,7 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             <div class="flex flex-col items-center sm:items-start">
               <p class="font-medium text-gray-900">Company</p>
