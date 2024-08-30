@@ -171,12 +171,41 @@ $(document).ready(function () {
           </li>
         </ul>
 
-        <p class="footer-copyright">&copy; 2021. Company Name. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2021 Dhruv Research, All rights reserved.</p>
       </div>
 
       <div class="footer-item-right">
       
-        
+        <div class="footer-category d-none d-md-flex">
+          <p class="footer-category-p">Services</p>
+
+          <ul class="footer-category-list">
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Market Research and Multimodal Survey </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Media & Entertainment Rating </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Economy & Financial Scanner </a>
+            </li>
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a">Consumer Preference Index </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Politics and Governance </a>
+            </li>
+
+            <li>
+              <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Survey Scripting </a>
+            </li>
+          </ul>
+        </div>
+
+
 
         <div class="footer-category">
           <p class="footer-category-p">Company</p>
@@ -215,7 +244,7 @@ $(document).ready(function () {
             </li>
 
             <li>
-              <a href="https://dhruvresearch.com/icps.html" class="footer-category-a"> Indian Constitutional provisions for Surveys </a>
+              <a id="icps-link" href="https://dhruvresearch.com/icps.html" class="footer-category-a"> Indian Constitutional provisions for Surveys </a>
             </li>
           </ul>
         </div>
@@ -225,14 +254,13 @@ $(document).ready(function () {
       </div>
     </div>
 
-    <p class="footer-outer-copyright">&copy; 2022. Company Name. All rights reserved.</p>
+    <p class="footer-outer-copyright">&copy; 2021 Dhruv Research, All rights reserved.</p>
   </div>
 </footer>
   `);
 });
 
-/*
-<div class="footer-category">
+/** <div class="footer-category">
           <p class="footer-category-p">Services</p>
 
           <ul class="footer-category-list">
@@ -259,7 +287,4 @@ $(document).ready(function () {
               <a href="https://dhruvresearch.com/contact.html#_solution" class="footer-category-a"> Survey Scripting </a>
             </li>
           </ul>
-        </div>
-
-
-*/
+        </div> */

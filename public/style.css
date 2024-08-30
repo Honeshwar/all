@@ -211,7 +211,8 @@ p {
   position: fixed;
   /* top: 100px; */
   right: 2rem;
-  bottom: 2rem;
+  /* bottom: 2rem; */
+  bottom: 3rem;
   z-index: 100;
 }
 
@@ -738,6 +739,7 @@ html {
   background-color: #1977f3;
   border-radius: 0px 10px 10px 0px;
   width: 40px;
+  display: flex;
   justify-content: flex-start;
   transition: all 0.5s ease;
 }
@@ -751,6 +753,7 @@ html {
   /* background-color: #1da0f3; */
   border-radius: 0px 10px 10px 0px;
   width: 40px;
+  display: flex;
   justify-content: flex-start;
   transition: all 0.5s ease;
 }
@@ -763,6 +766,7 @@ html {
   background-color: #1c75bc;
   border-radius: 0px 10px 10px 0px;
   width: 40px;
+  display: flex;
   justify-content: flex-start;
   transition: all 0.5s ease;
 }
@@ -775,6 +779,7 @@ html {
   background-color: #e72017;
   border-radius: 0px 10px 10px 0px;
   width: 40px;
+  display: flex;
   justify-content: flex-start;
   transition: all 0.5s ease;
 }
@@ -786,6 +791,7 @@ html {
 .social_media_container span:nth-of-type(5) a {
   background-color: #e1306c;
   border-radius: 0px 10px 10px 0px;
+  display: flex;
   width: 40px;
   justify-content: flex-start;
   transition: all 0.5s ease;
@@ -1700,10 +1706,10 @@ CSS for footer */
   --text-color: #334155;
 }
 .footer-container {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
   margin-top: 2rem;
   max-width: 1280px;
 
@@ -1820,15 +1826,19 @@ CSS for footer */
   margin-inline: auto;
 }
 .footer-outer-copyright {
-  margin-top: 1.25rem;
+  /* margin-top: 1.25rem; */
+  margin-bottom: 0;
   font-size: 0.875rem;
   line-height: 1.25rem;
   text-align: center;
 }
 @media (min-width: 640px) {
   .footer-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    /* padding-left: 1.5rem;
+    padding-right: 1.5rem; */
+    padding-inline: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
   .footer-top {
     gap: 1.5rem;
@@ -1870,9 +1880,11 @@ CSS for footer */
 @media (min-width: 1024px) {
   .footer-container {
     padding-left: 2rem;
-    padding-right: 2rem;
+    padding-right: 1rem;
     margin-top: 4rem;
     /* margin-bottom: 2rem; */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
   .footer-top {
@@ -1886,7 +1898,20 @@ CSS for footer */
     gap: 2rem;
   }
 
+  /* .footer-category {
+    align-items: flex-start;
+    justify-content: center;
+  } */
+  /* .footer-category-list {
+    align-items: flex-start;
+  }
+
+  */
   .footer-category-p-map {
     margin-inline: auto;
   }
+
+  /* #icps-link {
+    white-space: nowrap;
+  } */
 }
